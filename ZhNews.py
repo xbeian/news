@@ -5,7 +5,7 @@
 import re
 import requests
 import textwrap
-
+import html
 
 def news_get():
     url = 'https://www.zhihu.com/api/v4/columns/c_1261258401923026944/items'
@@ -24,6 +24,7 @@ def news_get():
         if index > 14:
             return news, verse
         title = news_list[index]
+        title = html.unescape(title)
         wrapped_text = textwrap.wrap(title, width=28)
         title = '\n\n'.join(wrapped_text)
         news += title + '\n\n'
